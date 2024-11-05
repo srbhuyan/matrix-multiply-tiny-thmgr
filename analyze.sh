@@ -200,7 +200,8 @@ for i in ${core[@]}
 do
   # time
   start=`date +%s.%N`;\
-  ./$algo $iva_data $iva_data $i;\
+#  ./$algo $iva_data $iva_data $i;\
+curl -D - --header "Content-Type: application/json" --output - --request POST --data '{"id": 1, "lib":"libmm.so", "fn": "main", "row": '\""$iva_data"\"', "core": '\""$i"\"'}' 192.168.1.36:8092/run
   end=`date +%s.%N`;\
   time_parallel+=(`printf '%.8f' $( echo "$end - $start" | bc -l )`);
 
